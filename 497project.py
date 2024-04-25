@@ -1,7 +1,6 @@
 # Import Libraries
 
-import matplotlib as mpl
-from mpl import pyplot as plt
+import matplotlib.pyplot as plt
 import os
 import numpy as np
 from mpi4py import MPI

@@ -58,7 +58,7 @@ ap = AeroProblem(
     T=T,
     areaRef=1.0,
     chordRef=1.0,
-    evalFuncs=["cl", "cd"],
+    evalFuncs=["cl", "cd", "cm"],
 )
 # Add angle of attack variable
 if mycl != 0.0:
@@ -122,7 +122,7 @@ def cruiseFuncsSens(x, funcs):
     CFDSolver.evalFunctionsSens(ap, funcsSens)
     CFDSolver.checkAdjointFailure(ap, funcsSens)
     print("function sensitivities:")
-    evalFunc = ["fc_cd", "fc_cl", "fail"]
+    evalFunc = ["fc_cd", "fc_cl", "fc_cm", "fail"]
     for var in evalFunc:
         print(f"    {var}: {funcsSens[var]}")
     return funcsSens

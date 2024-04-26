@@ -203,7 +203,13 @@ optProb.getDVConIndex()
 # Run optimization
 
 # Run optimization
-optOptions = {"IFILE": os.path.join(outputDir, "IPOPT.out")}
+optOptions = { "print_level": [int, 0],
+                "file_print_level": [int, 5],
+                "sb": [str, "yes"],
+                "print_user_options": [str, "yes"],
+                "output_file": [str, "IPOPT.out"],
+                "linear_solver": [str, "mumps"],
+             }
 opt = OPT("IPOPT", options=optOptions)
 sol = opt(optProb, MP.sens, storeHistory=os.path.join(outputDir, "opt_IPOPT.hst"))
 if MPI.COMM_WORLD.rank == 0:

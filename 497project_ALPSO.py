@@ -204,7 +204,7 @@ optProb.getDVConIndex()
 
 # Run optimization
 #optOptions = {"IFILE": os.path.join(outputDir, "ALPSO.out")}
-opt = OPT("ALPSO", options=None)
+opt = OPT("ALPSO", defaultOptions=defOpts)
 sol = opt(optProb, MP.sens, storeHistory=os.path.join(outputDir, "opt_ALPSO.hst"))
 if MPI.COMM_WORLD.rank == 0:
     print(sol)

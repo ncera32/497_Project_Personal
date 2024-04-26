@@ -204,15 +204,15 @@ optProb.getDVConIndex()
 
 # Run optimization
 optOptions = {
-            "PopSize": 100,
-            "maxGen": 1000,
+            "PopSize": 50,
+            "maxGen": 500,
             "pCross_real": 0.6,
             "pMut_real": 0.2,
             "eta_c": 10.0,
             "eta_m": 20.0,
             "pCross_bin": 0.0,
             "pMut_bin": 0.0,
-            "PrintOut": 1,
+            "PrintOut": 2,
             "seed": 0,
             "xinit": 0
         }

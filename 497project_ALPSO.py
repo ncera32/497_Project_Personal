@@ -37,7 +37,7 @@ MP.createCommunicators()
 
 #CHECK
 curDir = os.path.abspath(os.path.dirname(__file__))
-outputDir = os.path.join(curDir, "output_NLPQLP")
+outputDir = os.path.join(curDir, "output_ALPSO")
 
 if not os.path.exists(outputDir):
     os.mkdir(outputDir)
@@ -203,9 +203,9 @@ optProb.getDVConIndex()
 # Run optimization
 
 # Run optimization
-optOptions = {"IFILE": os.path.join(outputDir, "NLPQLP.out")}
-opt = OPT("NLPQLP", options=optOptions)
-sol = opt(optProb, MP.sens, storeHistory=os.path.join(outputDir, "opt_NLPQLP.hst"))
+optOptions = {"IFILE": os.path.join(outputDir, "ALPSO.out")}
+opt = OPT("ALPSO", options=optOptions)
+sol = opt(optProb, MP.sens, storeHistory=os.path.join(outputDir, "opt_ALPSO.hst"))
 if MPI.COMM_WORLD.rank == 0:
     print(sol)
 
@@ -213,4 +213,4 @@ if MPI.COMM_WORLD.rank == 0:
     
 # Save the final figure
 CFDSolver.airfoilAxs[1].legend(["Original", "Optimized"], labelcolor="linecolor")
-CFDSolver.airfoilFig.savefig(os.path.join(outputDir, "OptFoil_NLPQLP.pdf"))
+CFDSolver.airfoilFig.savefig(os.path.join(outputDir, "OptFoil_ALPSO.pdf"))

@@ -210,8 +210,6 @@ optOptions = { "print_level": [int, 0],
                 "output_file": os.path.join(outputDir, "SLSQP.out"),
                 "linear_solver": [str, "mumps"],
                 "Tol": 1e-6
-                "constr_viol_tol": 1e-6
-                "max_iter": 500
              }
 opt = OPT("IPOPT", options=optOptions)
 sol = opt(optProb, MP.sens, storeHistory=os.path.join(outputDir, "opt_IPOPT.hst"))

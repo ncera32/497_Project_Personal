@@ -1,6 +1,6 @@
 # Import Libraries
 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import os
 import numpy as np
 from mpi4py import MPI
@@ -10,13 +10,13 @@ from pyoptsparse import Optimization, OPT
 from multipoint import multiPointSparse
 from cmplxfoil import CMPLXFOIL, AnimateAirfoilOpt
 
-import matplotlib as mpl
+#import matplotlib as mpl
 
-mpl.rcParams['lines.linewidth'] = 2
-mpl.rc('xtick', labelsize=24) 
-mpl.rc('ytick', labelsize=24) 
-mpl.rc('axes', labelsize=24) 
-mpl.rc('font', size=24)
+#mpl.rcParams['lines.linewidth'] = 2
+#mpl.rc('xtick', labelsize=24) 
+#mpl.rc('ytick', labelsize=24) 
+#mpl.rc('axes', labelsize=24) 
+#mpl.rc('font', size=24)
 
 # Specifying Parameters for Optimization
 
@@ -224,26 +224,28 @@ CFDSolver.airfoilFig.savefig(os.path.join(outputDir, "OptFoil.pdf"))
 #removed extra_args=["-vcodec", "libx264"] from above
 
 # Plotting
-fig = plt.figure(figsize = (12,12))
-iterations_slsqp = np.arange(len(obj_vals_SLSQP))
-ax1 = fig.add_subplot(221)
-ax1.plot(iterations_slsqp, obj_vals_SLSQP, marker='.', lw=2, color='r')
-ax1.set_xlabel('iterations')
-ax1.set_ylabel('Cd value')
-plt.tight_layout()
 
-iterations_slsqp = np.arange(len(cl_con_vals_SLSQP))
-ax2 = fig.add_subplot(222)
-ax2.plot(iterations_slsqp, cl_con_vals_SLSQP, marker='.', lw=2, color='r')
-ax2.set_xlabel('iterations')
-ax2.set_ylabel('CL constraint violation')
-plt.tight_layout()
+# removed subplots (using separate figures) and try adding other algorithm information
 
-iterations_slsqp = np.arange(len(cm_con_vals_SLSQP))
-ax3 = fig.add_subplot(223)
-ax3.plot(iterations_slsqp, cm_con_vals_SLSQP, marker='.', lw=2, color='r')
-ax3.set_xlabel('iterations')
-ax3.set_ylabel('CM constraint violation')
-plt.tight_layout()
+#fig1 = plt.figure(figsize = (12,12))
+#iterations_slsqp = np.arange(len(obj_vals_SLSQP))
+#plt.plot(iterations_slsqp, obj_vals_SLSQP, marker='.', lw=2, color='r')
+#plt.xlabel('iterations')
+#plt.ylabel('Cd value')
+#plt.show()
+
+#iterations_slsqp = np.arange(len(cl_con_vals_SLSQP))
+#fig2 = plt.figure(figsize = (12,12))
+#plt.plot(iterations_slsqp, cl_con_vals_SLSQP, marker='.', lw=2, color='r')
+#plt.xlabel('iterations')
+#plt.ylabel('CL constraint violation')
+#plt.show()
+
+#iterations_slsqp = np.arange(len(cm_con_vals_SLSQP))
+#fig3 = plt.figure(figsize = (12,12))
+#plt.plot(iterations_slsqp, cm_con_vals_SLSQP, marker='.', lw=2, color='r')
+#plt.xlabel('iterations')
+#plt.ylabel('CM constraint violation')
+#plt.show()
 
  

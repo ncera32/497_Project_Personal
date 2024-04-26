@@ -203,7 +203,19 @@ optProb.getDVConIndex()
 # Run optimization
 
 # Run optimization
-optOptions = _getDefaultOptions()
+optOptions = {
+            "PopSize": [int, 100],
+            "maxGen": [int, 1000],
+            "pCross_real": [float, 0.6],
+            "pMut_real": [float, 0.2],
+            "eta_c": [float, 10.0],
+            "eta_m": [float, 20.0],
+            "pCross_bin": [float, 0.0],
+            "pMut_bin": [float, 0.0],
+            "PrintOut": [int, 1],
+            "seed": [int, 0],
+            "xinit": [int, 0],
+        }
 opt = OPT("NSGA2", options=optOptions)
 sol = opt(optProb, MP.sens, storeHistory=os.path.join(outputDir, "opt_NSGA2.hst"))
 if MPI.COMM_WORLD.rank == 0:

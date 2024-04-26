@@ -217,7 +217,7 @@ optOptions = {
             "xinit": 0
         }
 opt = OPT("NSGA2", options=optOptions)
-sol = opt(optProb, MP.sens, storeHistory=os.path.join(outputDir, "opt_NSGA2.hst"))
+sol = opt(optProb, MP.sens, storeHistory="opt_NSGA2.hst")
 if MPI.COMM_WORLD.rank == 0:
     print(sol)
 

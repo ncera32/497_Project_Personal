@@ -37,7 +37,7 @@ MP.createCommunicators()
 
 #CHECK
 curDir = os.path.abspath(os.path.dirname(__file__))
-outputDir = os.path.join(curDir, "output_COBYLA")
+outputDir = os.path.join(curDir, "output_NSGA2")
 
 if not os.path.exists(outputDir):
     os.mkdir(outputDir)
@@ -203,9 +203,9 @@ optProb.getDVConIndex()
 # Run optimization
 
 # Run optimization
-optOptions = {"IFILE": os.path.join(outputDir, "COBYLA.out")}
-opt = OPT("COBYLA", options=optOptions)
-sol = opt(optProb, MP.sens, storeHistory=os.path.join(outputDir, "opt_COBYLA.hst"))
+optOptions = {"IFILE": os.path.join(outputDir, "NSGA2.out")}
+opt = OPT("NSGA2", options=optOptions)
+sol = opt(optProb, MP.sens, storeHistory=os.path.join(outputDir, "opt_NSGA2.hst"))
 if MPI.COMM_WORLD.rank == 0:
     print(sol)
 
@@ -213,4 +213,4 @@ if MPI.COMM_WORLD.rank == 0:
     
 # Save the final figure
 CFDSolver.airfoilAxs[1].legend(["Original", "Optimized"], labelcolor="linecolor")
-CFDSolver.airfoilFig.savefig(os.path.join(outputDir, "OptFoil_COBYLA.pdf"))
+CFDSolver.airfoilFig.savefig(os.path.join(outputDir, "OptFoil_NSGA2.pdf"))

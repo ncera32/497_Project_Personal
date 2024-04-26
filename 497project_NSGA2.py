@@ -203,7 +203,7 @@ optProb.getDVConIndex()
 # Run optimization
 
 # Run optimization
-optOptions = {"IFILE": os.path.join(outputDir, "NSGA2.out")}
+optOptions = defOpts
 opt = OPT("NSGA2", options=optOptions)
 sol = opt(optProb, MP.sens, storeHistory=os.path.join(outputDir, "opt_NSGA2.hst"))
 if MPI.COMM_WORLD.rank == 0:

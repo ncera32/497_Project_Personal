@@ -37,7 +37,7 @@ MP.createCommunicators()
 
 #CHECK
 curDir = os.path.abspath(os.path.dirname(__file__))
-outputDir = os.path.join(curDir, "output")
+outputDir = os.path.join(curDir, "output_SLSQP")
 
 if not os.path.exists(outputDir):
     os.mkdir(outputDir)
@@ -140,6 +140,7 @@ def cruiseFuncsSens(x, funcs):
 obj_vals_SLSQP = []
 cl_con_vals_SLSQP = []
 cm_con_vals_SLSQP = []
+fc_cd_vals_SLSQP = []
 
 def objCon(funcs, printOK):
     # Assemble the objective and any additional constraints:
@@ -150,7 +151,8 @@ def objCon(funcs, printOK):
     obj_vals_SLSQP.append(funcs["obj"])
     cl_con_vals_SLSQP.append(funcs["cl_con_" + ap.name])
     cm_con_vals_SLSQP.append(funcs["cm_con_" + ap.name])
-
+    fc_cd_vals_SLSQP.append(funcs["fc_cd"])
+    
     if printOK:
         print("funcs in obj:", funcs)
     return funcs
@@ -205,7 +207,7 @@ optProb.getDVConIndex()
 # Run optimization
 optOptions = {"IFILE": os.path.join(outputDir, "SLSQP.out")}
 opt = OPT("SLSQP", options=optOptions)
-sol = opt(optProb, MP.sens, storeHistory=os.path.join(outputDir, "opt.hst"))
+sol = opt(optProb, MP.sens, storeHistory=os.path.join(outputDir, "opt_SLSQP.hst"))
 if MPI.COMM_WORLD.rank == 0:
     print(sol)
 
@@ -213,7 +215,21 @@ if MPI.COMM_WORLD.rank == 0:
     
 # Save the final figure
 CFDSolver.airfoilAxs[1].legend(["Original", "Optimized"], labelcolor="linecolor")
-CFDSolver.airfoilFig.savefig(os.path.join(outputDir, "OptFoil.pdf"))
+CFDSolver.airfoilFig.savefig(os.path.join(outputDir, "OptFoil_SLSQP.pdf"))
+
+if os.path.exists("optimization_results.npz"):
+    np.savez("optimization_results.npz",
+             obj_vals_SLSQP=obj_vals_SLSQP,
+             cl_con_vals_SLSQP=cl_con_vals_SLSQP,
+             cm_con_vals_SLSQP=cm_con_vals_SLSQP,
+             fc_cd_vals_SLSQP=fc_cd_vals_SLSQP,
+             **np.load("optimization_results.npz"))
+else:
+    np.savez("optimization_results.npz",
+             obj_vals_SLSQP=obj_vals_SLSQP,
+             cl_con_vals_SLSQP=cl_con_vals_SLSQP,
+             cm_con_vals_SLSQP=cm_con_vals_SLSQP,
+             fc_cd_vals_SLSQP=fc_cd_vals_SLSQP)
 
 
 # Animate the optimization

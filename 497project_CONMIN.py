@@ -140,6 +140,7 @@ def cruiseFuncsSens(x, funcs):
 obj_vals_CONMIN = []
 cl_con_vals_CONMIN = []
 cm_con_vals_CONMIN = []
+fc_cd_vals_CONMIN = []
 
 def objCon(funcs, printOK):
     # Assemble the objective and any additional constraints:
@@ -150,6 +151,7 @@ def objCon(funcs, printOK):
     obj_vals_CONMIN.append(funcs["obj"])
     cl_con_vals_CONMIN.append(funcs["cl_con_" + ap.name])
     cm_con_vals_CONMIN.append(funcs["cm_con_" + ap.name])
+    fc_cd_vals_CONMIN.append(funcs["fc_cd"])
 
     if printOK:
         print("funcs in obj:", funcs)
@@ -228,8 +230,8 @@ CFDSolver.airfoilFig.savefig(os.path.join(outputDir, "OptFoil_CONMIN.pdf"))
 # removed subplots (using separate figures) and try adding other algorithm information
 
 fig1 = plt.figure(figsize = (12,12))
-iterations_CONMIN = np.arange(len(obj_vals_CONMIN))
-plt.plot(iterations_CONMIN, obj_vals_CONMIN, marker='.', lw=2, color='r')
+iterations_CONMIN = np.arange(len(fc_cd_vals_CONMIN))
+plt.plot(iterations_CONMIN, fc_cd_vals_CONMIN, marker='.', lw=2, color='r')
 plt.xlabel('iterations')
 plt.ylabel('Cd value')
 plt.show()

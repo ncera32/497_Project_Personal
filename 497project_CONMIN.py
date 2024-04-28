@@ -237,6 +237,7 @@ plt.plot(iterations_CONMIN, real_fc_cd_vals, marker='.', lw=2, color='r')
 plt.xlabel('iterations')
 plt.ylabel('Cd value')
 plt.show()
+plt.pause(30)
 
 #iterations_slsqp = np.arange(len(cl_con_vals_SLSQP))
 #fig2 = plt.figure(figsize = (12,12))

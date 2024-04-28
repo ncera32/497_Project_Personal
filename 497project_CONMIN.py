@@ -1,6 +1,6 @@
 # Import Libraries
 
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import os
 import numpy as np
 from mpi4py import MPI
@@ -10,13 +10,13 @@ from pyoptsparse import Optimization, OPT
 from multipoint import multiPointSparse
 from cmplxfoil import CMPLXFOIL, AnimateAirfoilOpt
 
-#import matplotlib as mpl
+import matplotlib as mpl
 
-#mpl.rcParams['lines.linewidth'] = 2
-#mpl.rc('xtick', labelsize=24) 
-#mpl.rc('ytick', labelsize=24) 
-#mpl.rc('axes', labelsize=24) 
-#mpl.rc('font', size=24)
+mpl.rcParams['lines.linewidth'] = 2
+mpl.rc('xtick', labelsize=24) 
+mpl.rc('ytick', labelsize=24) 
+mpl.rc('axes', labelsize=24) 
+mpl.rc('font', size=24)
 
 # Specifying Parameters for Optimization
 
@@ -137,9 +137,9 @@ def cruiseFuncsSens(x, funcs):
 
 
 # TRYING TO COLLECT METRIC HISTORY IN ARRAYS
-#obj_vals_SLSQP = []
-#cl_con_vals_SLSQP = []
-#cm_con_vals_SLSQP = []
+obj_vals_CONMIN = []
+cl_con_vals_CONMIN = []
+cm_con_vals_CONMIN = []
 
 def objCon(funcs, printOK):
     # Assemble the objective and any additional constraints:
@@ -147,9 +147,9 @@ def objCon(funcs, printOK):
     funcs["cl_con_" + ap.name] = funcs[ap["cl"]] - mycl
     funcs["cm_con_" + ap.name] = funcs[ap["cm"]] - mycm
 
-    #obj_vals_SLSQP.append(funcs["obj"])
-    #cl_con_vals_SLSQP.append(funcs["cl_con_" + ap.name])
-    #cm_con_vals_SLSQP.append(funcs["cm_con_" + ap.name])
+    obj_vals_CONMIN.append(funcs["obj"])
+    cl_con_vals_CONMIN.append(funcs["cl_con_" + ap.name])
+    cm_con_vals_CONMIN.append(funcs["cm_con_" + ap.name])
 
     if printOK:
         print("funcs in obj:", funcs)
@@ -227,12 +227,12 @@ CFDSolver.airfoilFig.savefig(os.path.join(outputDir, "OptFoil_CONMIN.pdf"))
 
 # removed subplots (using separate figures) and try adding other algorithm information
 
-#fig1 = plt.figure(figsize = (12,12))
-#iterations_slsqp = np.arange(len(obj_vals_SLSQP))
-#plt.plot(iterations_slsqp, obj_vals_SLSQP, marker='.', lw=2, color='r')
-#plt.xlabel('iterations')
-#plt.ylabel('Cd value')
-#plt.show()
+fig1 = plt.figure(figsize = (12,12))
+iterations_slsqp = np.arange(len(obj_vals_CONMIN))
+plt.plot(iterations_CONMIN, obj_vals_CONMIN, marker='.', lw=2, color='r')
+plt.xlabel('iterations')
+plt.ylabel('Cd value')
+plt.show()
 
 #iterations_slsqp = np.arange(len(cl_con_vals_SLSQP))
 #fig2 = plt.figure(figsize = (12,12))

@@ -231,8 +231,9 @@ print(fc_cd_vals_CONMIN)
 # removed subplots (using separate figures) and try adding other algorithm information
 
 fig1 = plt.figure(figsize = (12,12))
-iterations_CONMIN = np.arange(len(fc_cd_vals_CONMIN))
-plt.plot(iterations_CONMIN, fc_cd_vals_CONMIN, marker='.', lw=2, color='r')
+real_fc_cd_vals = [np.real(fc_cd_val) for fc_cd_val in fc_cd_vals_CONMIN]
+iterations_CONMIN = np.arange(len(real_fc_cd_vals))
+plt.plot(iterations_CONMIN, real_fc_cd_vals, marker='.', lw=2, color='r')
 plt.xlabel('iterations')
 plt.ylabel('Cd value')
 plt.show()

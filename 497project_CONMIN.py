@@ -228,7 +228,7 @@ CFDSolver.airfoilFig.savefig(os.path.join(outputDir, "OptFoil_CONMIN.pdf"))
 # removed subplots (using separate figures) and try adding other algorithm information
 
 fig1 = plt.figure(figsize = (12,12))
-iterations_slsqp = np.arange(len(obj_vals_CONMIN))
+iterations_CONMIN = np.arange(len(obj_vals_CONMIN))
 plt.plot(iterations_CONMIN, obj_vals_CONMIN, marker='.', lw=2, color='r')
 plt.xlabel('iterations')
 plt.ylabel('Cd value')

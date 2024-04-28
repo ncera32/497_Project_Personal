@@ -217,6 +217,7 @@ if MPI.COMM_WORLD.rank == 0:
 CFDSolver.airfoilAxs[1].legend(["Original", "Optimized"], labelcolor="linecolor")
 CFDSolver.airfoilFig.savefig(os.path.join(outputDir, "OptFoil_CONMIN.pdf"))
 
+print(fc_cd_vals_CONMIN)
 
 # Animate the optimization
 #AnimateAirfoilOpt(outputDir, "fc").animate(

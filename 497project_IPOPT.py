@@ -136,10 +136,11 @@ def cruiseFuncsSens(x, funcs):
     return funcsSens
 
 
-# TRYING TO COLLECT METRIC HISTORY IN ARRAYS
-#obj_vals_SLSQP = []
-#cl_con_vals_SLSQP = []
-#cm_con_vals_SLSQP = []
+#TRYING TO COLLECT METRIC HISTORY IN ARRAYS
+obj_vals_IPOPT = []
+cl_con_vals_IPOPT = []
+cm_con_vals_IPOPT = []
+fc_cd_vals_IPOPT = []
 
 def objCon(funcs, printOK):
     # Assemble the objective and any additional constraints:
@@ -147,9 +148,10 @@ def objCon(funcs, printOK):
     funcs["cl_con_" + ap.name] = funcs[ap["cl"]] - mycl
     funcs["cm_con_" + ap.name] = funcs[ap["cm"]] - mycm
 
-    #obj_vals_SLSQP.append(funcs["obj"])
-    #cl_con_vals_SLSQP.append(funcs["cl_con_" + ap.name])
-    #cm_con_vals_SLSQP.append(funcs["cm_con_" + ap.name])
+    obj_vals_IPOPT.append(funcs["obj"])
+    cl_con_vals_IPOPT.append(funcs["cl_con_" + ap.name])
+    cm_con_vals_IPOPT.append(funcs["cm_con_" + ap.name])
+    fc_cd_vals_IPOPT.append(funcs["fc_cd"])
 
     if printOK:
         print("funcs in obj:", funcs)
@@ -207,7 +209,7 @@ optOptions = { "print_level": [int, 0],
                 "file_print_level": [int, 5],
                 "sb": [str, "yes"],
                 "print_user_options": [str, "yes"],
-                "output_file": os.path.join(outputDir, "SLSQP.out"),
+                "output_file": os.path.join(outputDir, "IPOPT.out"),
                 "linear_solver": [str, "mumps"],
              }
 opt = OPT("IPOPT", options=optOptions)
@@ -220,3 +222,17 @@ if MPI.COMM_WORLD.rank == 0:
 # Save the final figure
 CFDSolver.airfoilAxs[1].legend(["Original", "Optimized"], labelcolor="linecolor")
 CFDSolver.airfoilFig.savefig(os.path.join(outputDir, "OptFoil_IPOPT.pdf"))
+
+if os.path.exists("optimization_results.npz"):
+    np.savez("optimization_results.npz",
+             obj_vals_IPOPT=obj_vals_IPOPT,
+             cl_con_vals_IPOPT=cl_con_vals_IPOPT,
+             cm_con_vals_IPOPT=cm_con_vals_IPOPT,
+             fc_cd_vals_IPOPT=fc_cd_vals_IPOPT,
+             **np.load("optimization_results.npz"))
+else:
+    np.savez("optimization_results.npz",
+             obj_vals_IPOPT=obj_vals_IPOPT,
+             cl_con_vals_IPOPT=cl_con_vals_IPOPT,
+             cm_con_vals_IPOPT=cm_con_vals_IPOPT,
+             fc_cd_vals_IPOPT=fc_cd_vals_IPOPT)

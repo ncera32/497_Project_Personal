@@ -20,8 +20,8 @@ cl_con_vals_SLSQP = data['cl_con_vals_SLSQP']
 cm_con_vals_SLSQP = data['cm_con_vals_SLSQP']
 fc_cd_vals_SLSQP = data['fc_cd_vals_SLSQP']
 obj_vals_IPOPT = data['obj_vals_IPOPT']
-cl_con_vals_IPOPT = data['cl_con_vals_IPOPT']
-cm_con_vals_IPOPT = data['cm_con_vals_IPOPT']
+cl_con_vals_IPOPT = data['cl_con_vals_IPOPT'][:400]
+cm_con_vals_IPOPT = data['cm_con_vals_IPOPT'][:400]
 fc_cd_vals_IPOPT = data['fc_cd_vals_IPOPT']
 
 

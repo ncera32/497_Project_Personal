@@ -231,7 +231,7 @@ else:
              cm_con_vals_CONMIN=cm_con_vals_CONMIN,
              fc_cd_vals_CONMIN=fc_cd_vals_CONMIN)
 
-print(fc_cd_vals_CONMIN)
+#print(fc_cd_vals_CONMIN)
 
 # Animate the optimization
 #AnimateAirfoilOpt(outputDir, "fc").animate(
